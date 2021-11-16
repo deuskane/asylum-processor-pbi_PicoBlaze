@@ -6,7 +6,7 @@
 -- Author     : Mathieu Rosiere
 -- Company    : 
 -- Created    : 2017-03-30
--- Last update: 2017-05-01
+-- Last update: 2021-11-16
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -109,7 +109,6 @@ begin  -- architecture rtl
       ,write_strobe_o    => pbi_ini_o.we     
       ,interrupt_i       => interrupt_i    
       ,interrupt_ack_o   => interrupt_ack_o
-      ,debug_o           => open
         );
   end generate gen_openblaze8;
 
