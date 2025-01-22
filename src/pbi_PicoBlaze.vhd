@@ -6,7 +6,7 @@
 -- Author     : Mathieu Rosiere
 -- Company    : 
 -- Created    : 2017-03-30
--- Last update: 2021-11-16
+-- Last update: 2025-01-21
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -16,7 +16,8 @@
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2017-03-30  1.0      mrosiere	Created
+-- 2017-03-30  1.0      mrosiere Created
+-- 2025-01-21  1.1      mrosiere Fix busy usage
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -54,10 +55,14 @@ architecture rtl of pbi_PicoBlaze is
   signal clk  : std_logic;
   signal cke  : std_logic;
   signal arst : std_logic;
+  signal busy : std_logic;
+
+  
 begin  -- architecture rtl
 
   arst <= not arstn_i;
-  cke  <= cke_i or not pbi_tgt_i.busy;
+  busy <= pbi_tgt_i.busy;
+  cke  <= cke_i and not busy;
 
   gen_kcpsm: if USE_KCPSM
   generate
