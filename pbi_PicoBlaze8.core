@@ -32,9 +32,9 @@ filesets:
     file_type : vhdlSource
     depend :
       - ">=asylum:processor:pbi_OpenBlaze8:1.0.0"
-      - ">=asylum:package:pbi_pkg:1.0.0"
-      - ">=asylum:component:gated_clock:1.0.0"
-      - ">=xilinx:processor:kcpsm:1.30"
+      - asylum:utils:pkg
+      - asylum:component:gated_clock
+      - xilinx:processor:kcpsm
       
 targets:
 
