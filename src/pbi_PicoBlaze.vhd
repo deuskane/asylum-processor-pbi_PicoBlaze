@@ -6,7 +6,7 @@
 -- Author     : Mathieu Rosiere
 -- Company    : 
 -- Created    : 2017-03-30
--- Last update: 2025-03-08
+-- Last update: 2025-04-15
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -18,6 +18,8 @@
 -- Date        Version  Author  Description
 -- 2017-03-30  1.0      mrosiere Created
 -- 2025-01-21  1.1      mrosiere Fix busy usage
+-- 2025-03-09  1.2      mrosiere Use unconstrainted pbi
+-- 2025-04-14  1.3      mrosiere Add output ics_o
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -37,6 +39,7 @@ entity pbi_PicoBlaze is
     arstn_i          : in    std_logic; -- asynchronous reset
 
     -- Instructions
+    ics_o            : out std_logic;
     iaddr_o          : out std_logic_vector(10-1 downto 0);
     idata_i          : in  std_logic_vector(17 downto 0);
     
@@ -55,14 +58,11 @@ architecture rtl of pbi_PicoBlaze is
   signal clk  : std_logic;
   signal cke  : std_logic;
   signal arst : std_logic;
-  signal busy : std_logic;
-
-  
 begin  -- architecture rtl
 
-  arst <= not arstn_i;
-  busy <= pbi_tgt_i.busy;
-  cke  <= cke_i and not busy;
+  arst    <= not arstn_i;
+  cke     <= cke_i and not pbi_tgt_i.busy;
+  ics_o   <= cke;
 
   gen_kcpsm: if USE_KCPSM
   generate
