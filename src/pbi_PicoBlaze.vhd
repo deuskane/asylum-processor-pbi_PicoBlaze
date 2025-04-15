@@ -66,11 +66,12 @@ begin  -- architecture rtl
 
   gen_kcpsm: if USE_KCPSM
   generate
-    ins_gated_clock : entity work.gated_clock(rtl)
+    ins_cgate : entity work.cgate(rtl)
       port map
       (clk_i       => clk_i
-      ,cmd_i       => cke
-      ,clk_gated_o => clk
+      ,cke_i       => cke
+      ,clk_o       => clk
+      ,dft_te_i    => '0'
        );
 
     kcpsm3 : entity work.kcpsm3(low_level_definition)

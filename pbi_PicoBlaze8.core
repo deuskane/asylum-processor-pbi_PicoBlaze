@@ -22,27 +22,35 @@ CAPI=2:
 name        : asylum:processor:pbi_PicoBlaze8:1.3.0
 description : PBI Generic wrapper for target IP
 
+#=========================================
 filesets:
+#=========================================
 
   #---------------------------------------
-  # Source Files
-  #---------------------------------------
   files_hdl:
+  #---------------------------------------
     files:
       - src/pbi_PicoBlaze.vhd
     file_type : vhdlSource
     depend :
       - ">=asylum:processor:pbi_OpenBlaze8:1.0.0"
       - asylum:utils:pkg
-      - asylum:component:gated_clock
+     #- asylum:component:gated_clock
       - xilinx:processor:kcpsm
-      
-targets:
 
   #---------------------------------------
-  # Default Target
+  target_generic:
+  #---------------------------------------
+    depend :
+      - asylum:target:generic
+
+#=========================================
+targets:
+#=========================================
+
   #---------------------------------------
   default: &default
+  #---------------------------------------
     description  : Default Target
     filesets     :
       - files_hdl
